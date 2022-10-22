@@ -3,18 +3,18 @@
 //
 
 public struct Station: Decodable {
-    enum StationType: String, Decodable {
+    public enum StationType: String, Decodable {
         case harmonic = "HARMONIC"
         case reference = "REFERENCE"
     }
 
-    let status: UInt
-    let id: String
-    let name: String
-    let latitude: Double
-    let longitude: Double
-    let provider: String
-    let type: StationType
-    let datums: Datums
-    let timezone: String
+    public let status: UInt
+    public let id: String
+    public let name: String
+    public let latitude: Double
+    public let longitude: Double
+    public let provider: String
+    public let type: StationType
+    public let datums: Datums
+    public let timezone: String
 }

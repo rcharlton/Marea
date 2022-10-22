@@ -3,8 +3,8 @@
 //
 
 public struct StationListing: Decodable {
-    let id: String
-    let name: String
-    let latitude: Double
-    let longitude: Double
+    public  let id: String
+    public  let name: String
+    public let latitude: Double
+    public let longitude: Double
 }

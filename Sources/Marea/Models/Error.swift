@@ -3,11 +3,16 @@
 //
 
 public struct Error: Decodable {
-    let message: String
-    let statusCode: Int
+    public let message: String
+    public let statusCode: Int
 
     enum CodingKeys: String, CodingKey {
         case message = "error"
         case statusCode = "status"
+    }
+
+    public init(message: String, statusCode: Int) {
+        self.message = message
+        self.statusCode = statusCode
     }
 }

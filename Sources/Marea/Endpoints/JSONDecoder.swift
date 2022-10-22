@@ -5,7 +5,7 @@
 import Bricolage
 import Foundation
 
-func makeJSONDecoder() -> JSONDecoder {
+public func makeJSONDecoder() -> JSONDecoder {
     configure(JSONDecoder()) {
         $0.dateDecodingStrategy = .iso8601
     }
