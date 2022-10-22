@@ -5,7 +5,7 @@
 import Bricolage
 import Foundation
 
-public class Marea {
+public class MareaClient {
     private enum Constant {
         /// https://api.marea.ooo/doc/
         static let serviceURL = URL(string: "https://api.marea.ooo")!
@@ -44,19 +44,20 @@ public class Marea {
         model: String? = nil,
         datum: Datum? = nil
     ) async throws -> Tides {
-        let endpoint = GetTides(
-            duration: duration,
-            timestamp: timestamp,
-            radius: radius,
-            interval: interval,
-            latitude: latitude,
-            longitude: longitude,
-            model: model,
-            stationRadius: nil,
-            stationId: nil,
-            datum: datum
+        try await webClient.invoke(
+            endpoint: GetTides(
+                duration: duration,
+                timestamp: timestamp,
+                radius: radius,
+                interval: interval,
+                latitude: latitude,
+                longitude: longitude,
+                model: model,
+                stationRadius: nil,
+                stationId: nil,
+                datum: datum
+            )
         )
-        return try await webClient.invoke(endpoint: endpoint)
     }
 
     public func tides(
@@ -68,19 +69,20 @@ public class Marea {
         stationId: String? = nil,
         datum: Datum? = nil
     ) async throws -> Tides {
-        let endpoint = GetTides(
-            duration: duration,
-            timestamp: timestamp,
-            radius: nil,
-            interval: interval,
-            latitude: nil,
-            longitude: nil,
-            model: model,
-            stationRadius: stationRadius,
-            stationId: stationId,
-            datum: datum
+        try await webClient.invoke(
+            endpoint: GetTides(
+                duration: duration,
+                timestamp: timestamp,
+                radius: nil,
+                interval: interval,
+                latitude: nil,
+                longitude: nil,
+                model: model,
+                stationRadius: stationRadius,
+                stationId: stationId,
+                datum: datum
+            )
         )
-        return try await webClient.invoke(endpoint: endpoint)
     }
 }
 
