@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "bricolage",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:rcharlton/Bricolage.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e5fe54ca95e9bcba14b7a0ee09753e8ff5a83d59"
+      }
+    }
+  ],
+  "version" : 2
+}
