@@ -19,4 +19,4 @@ public struct ListStations: Endpoint {
     }
 }
 
-public typealias StationsError = EndpointError<Marea.ListStations>
+public typealias StationsError = EndpointError<ListStations>

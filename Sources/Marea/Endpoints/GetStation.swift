@@ -21,4 +21,4 @@ public struct GetStation: Endpoint {
     }
 }
 
-public typealias StationError = EndpointError<Marea.GetStation>
+public typealias StationError = EndpointError<GetStation>
