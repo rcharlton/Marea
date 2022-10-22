@@ -5,7 +5,7 @@
 import Foundation
 
 public extension Bundle {
-    var bundledStation: Station? {
+    var station: Station? {
         get throws {
             try url(forResource: "v2-stations-NOAA-9415112", withExtension: "json")
                 .flatMap { try Data(contentsOf: $0) }
@@ -13,7 +13,7 @@ public extension Bundle {
         }
     }
 
-    var bundledTidesForModel: Tides? {
+    var tidesForModel: Tides? {
         get throws {
             try url(forResource: "v2-tides-model", withExtension: "json")
                 .flatMap { try Data(contentsOf: $0) }
@@ -21,7 +21,7 @@ public extension Bundle {
         }
     }
 
-    var bundledTidesForStation: Tides? {
+    var tidesForStation: Tides? {
         get throws {
             try url(forResource: "v2-tides-station", withExtension: "json")
                 .flatMap { try Data(contentsOf: $0) }
@@ -29,7 +29,7 @@ public extension Bundle {
         }
     }
 
-    var bundledStationsList: [StationListing]? {
+    var stationsList: [StationListing]? {
         get throws {
             try url(forResource: "v2-stations", withExtension: "json")
                 .flatMap { try Data(contentsOf: $0) }

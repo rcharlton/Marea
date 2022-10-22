@@ -3,6 +3,11 @@
 //
 
 public struct Error: Decodable {
-    let error: String
-    let status: Int
+    let message: String
+    let statusCode: Int
+
+    enum CodingKeys: String, CodingKey {
+        case message = "error"
+        case statusCode = "status"
+    }
 }

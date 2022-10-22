@@ -5,18 +5,20 @@
 import Bricolage
 import Foundation
 
-struct GetStation: Endpoint {
-    typealias Success = Station
-    typealias Failure = Error
+public struct GetStation: Endpoint {
+    public typealias Success = Station
+    public typealias Failure = Error
 
     let successStatusCodes = [200]
 
-    var decoder: Decoding { makeJSONDecoder() }
+    public var decoder: Decoding { makeJSONDecoder() }
 
     let id: String
 
-    func urlRequest(relativeTo url: URL) -> URLRequest? {
+    public func urlRequest(relativeTo url: URL) -> URLRequest? {
         URL(string: "/v2/stations/\(id)", relativeTo: url)
             .map { URLRequest(url: $0) }
     }
 }
+
+public typealias StationError = EndpointError<Marea.GetStation>

@@ -5,14 +5,14 @@
 import Bricolage
 import Foundation
 
-struct GetTides: Endpoint {
+public struct GetTides: Endpoint {
 
-    typealias Success = Tides
-    typealias Failure = Error
+    public typealias Success = Tides
+    public typealias Failure = Error
 
-    let successStatusCodes = [200]
+    public let successStatusCodes = [200]
 
-    var decoder: Decoding { makeJSONDecoder() }
+    public var decoder: Decoding { makeJSONDecoder() }
 
     enum Datum: String {
         case lat = "LAT"
@@ -144,9 +144,11 @@ struct GetTides: Endpoint {
         }
     }
 
-    func urlRequest(relativeTo url: URL) -> URLRequest? {
+    public func urlRequest(relativeTo url: URL) -> URLRequest? {
         urlComponents
             .url(relativeTo: url)
             .flatMap { URLRequest(url: $0) }
     }
 }
+
+public typealias TidesError = EndpointError<Marea.GetTides>
