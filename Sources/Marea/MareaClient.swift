@@ -5,85 +5,87 @@
 import Bricolage
 import Foundation
 
-public class MareaClient {
-    private enum Constant {
-        /// https://api.marea.ooo/doc/
-        static let serviceURL = URL(string: "https://api.marea.ooo")!
-    }
+public func makeMareaClient(token: String) -> MareaClient {
+    MareaWebClient(token: token)
+}
 
-    private let webClient: EndpointInvoking
+// MARK: -
 
-    init(webClient: EndpointInvoking) {
-        self.webClient = webClient
-    }
+public protocol MareaClient {
+    var stations: [StationListing] { get async throws }
 
-    public convenience init(token: String) {
-        let webClient = configure(WebClient(serviceURL: Constant.serviceURL)) {
-            $0.additionalHeaders = ["x-marea-api-token": token]
-        }
-        self.init(webClient: webClient)
-    }
+    func station(for id: String) async throws -> Station
 
-    public var stations: [StationListing] {
-        get async throws {
-            try await webClient.invoke(endpoint: ListStations())
-        }
-    }
+    func tides(
+        duration: UInt,
+        timestamp: UInt?,
+        radius: UInt?,
+        interval: UInt,
+        latitude: Double,
+        longitude: Double,
+        model: Model,
+        datum: Datum
+    ) async throws -> Tides
 
-    public func station(for id: String) async throws -> Station {
-        try await webClient.invoke(endpoint: GetStation(id: id))
-    }
+    func tides(
+        duration: UInt,
+        timestamp: UInt?,
+        interval: UInt,
+        model: Model,
+        stationRadius: UInt?,
+        stationId: String,
+        datum: Datum
+    ) async throws -> Tides
+}
 
-    public func tides(
-        duration: UInt? = nil,
+// MARK: -
+
+public extension MareaClient {
+    func tides(
+        duration: UInt = 1440,
         timestamp: UInt? = nil,
         radius: UInt? = nil,
-        interval: UInt? = nil,
-        latitude: Double? = nil,
-        longitude: Double? = nil,
-        model: String? = nil,
-        datum: Datum? = nil
+        interval: UInt = 3600,
+        latitude: Double,
+        longitude: Double,
+        datum: Datum = .msl
     ) async throws -> Tides {
-        try await webClient.invoke(
-            endpoint: GetTides(
-                duration: duration,
-                timestamp: timestamp,
-                radius: radius,
-                interval: interval,
-                latitude: latitude,
-                longitude: longitude,
-                model: model,
-                stationRadius: nil,
-                stationId: nil,
-                datum: datum
-            )
+        try await tides(
+            duration: duration,
+            timestamp: timestamp,
+            radius: radius,
+            interval: interval,
+            latitude: latitude,
+            longitude: longitude,
+            model: .fes2014,
+            datum: datum
         )
     }
 
-    public func tides(
-        duration: UInt? = nil,
+    func tides(
+        duration: UInt = 1440,
         timestamp: UInt? = nil,
-        interval: UInt? = nil,
-        model: String? = nil,
+        interval: UInt = 3600,
         stationRadius: UInt? = nil,
-        stationId: String? = nil,
-        datum: Datum? = nil
+        stationId: String,
+        datum: Datum = .msl
     ) async throws -> Tides {
-        try await webClient.invoke(
-            endpoint: GetTides(
-                duration: duration,
-                timestamp: timestamp,
-                radius: nil,
-                interval: interval,
-                latitude: nil,
-                longitude: nil,
-                model: model,
-                stationRadius: stationRadius,
-                stationId: stationId,
-                datum: datum
-            )
+        try await tides(
+            duration: duration,
+            timestamp: timestamp,
+            interval: interval,
+            model: .fes2014,
+            stationRadius: stationRadius,
+            stationId: stationId,
+            datum: datum
         )
     }
+}
+
+// MARK: -
+
+public enum Model {
+    case fes2014, eot20
 }
 
 public typealias Datum = GetTides.Datum
