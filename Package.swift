@@ -24,6 +24,9 @@ let package = Package(
             dependencies: ["Bricolage"]),
         .testTarget(
             name: "MareaTests",
-            dependencies: ["Marea", "Bricolage"]),
+            dependencies: ["Marea", "Bricolage"],
+            resources: [
+                .copy("Data")
+            ]),
     ]
 )

@@ -6,7 +6,7 @@ import XCTest
 @testable import Marea
 
 final class GetStationTests: XCTestCase {
-     func testURLRequest_Id_RequestIsCorrect() throws {
+     func testURLRequest_Id_RequestIsCorrect() {
         let endpoint = GetStation(id: "ID")
 
         let request = endpoint.urlRequest(relativeTo: Constant.baseURL)

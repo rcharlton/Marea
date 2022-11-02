@@ -6,7 +6,7 @@ import XCTest
 @testable import Marea
 
 final class GetTidesTests: XCTestCase {
-    func testURLRequest_ListStations_RequestIsCorrect() throws {
+    func testURLRequest_ListStations_RequestIsCorrect() {
         let endpoint = GetTides(
             duration: 123,
             timestamp: 234,

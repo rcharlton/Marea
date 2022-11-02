@@ -9,7 +9,7 @@ import XCTest
 @testable import Marea
 
 final class ListStationsTests: XCTestCase {
-    func testURLRequest_ListStations_RequestIsCorrect() throws {
+    func testURLRequest_ListStations_RequestIsCorrect() {
         let endpoint = ListStations()
 
         let request = endpoint.urlRequest(relativeTo: Constant.baseURL)
