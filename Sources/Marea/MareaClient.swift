@@ -5,8 +5,14 @@
 import Bricolage
 import Foundation
 
-public func makeMareaClient(token: String) -> MareaClient {
-    MareaWebClient(token: token)
+public func makeMareaClient(
+    serviceURL: URL = URL(string: "https://api.marea.ooo")!,
+    token: String
+) -> MareaClient {
+    let webClient = configure(WebClient(serviceURL: serviceURL)) {
+        $0.additionalHeaders = ["x-marea-api-token": token]
+    }
+    return MareaEndpointClient(with: webClient)
 }
 
 // MARK: -
@@ -84,8 +90,6 @@ public extension MareaClient {
 
 // MARK: -
 
-public enum Model {
-    case fes2014, eot20
-}
+public typealias Model = GetTides.Model
 
 public typealias Datum = GetTides.Datum

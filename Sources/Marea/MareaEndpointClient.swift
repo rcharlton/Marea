@@ -5,37 +5,25 @@
 import Bricolage
 import Foundation
 
-class MareaWebClient {
-    private enum Constant {
-        /// https://api.marea.ooo/doc/
-        static let serviceURL = URL(string: "https://api.marea.ooo")!
-    }
+class MareaEndpointClient {
+    private let client: EndpointInvoking
 
-    private let webClient: EndpointInvoking
-
-    init(webClient: EndpointInvoking) {
-        self.webClient = webClient
-    }
-
-    convenience init(token: String) {
-        let webClient = configure(WebClient(serviceURL: Constant.serviceURL)) {
-            $0.additionalHeaders = ["x-marea-api-token": token]
-        }
-        self.init(webClient: webClient)
+    init(with client: EndpointInvoking) {
+        self.client = client
     }
 }
 
 // MARK: -
 
-extension MareaWebClient: MareaClient {
+extension MareaEndpointClient: MareaClient {
     var stations: [StationListing] {
         get async throws {
-            try await webClient.invoke(endpoint: ListStations())
+            try await client.invoke(endpoint: ListStations())
         }
     }
 
     func station(for id: String) async throws -> Station {
-        try await webClient.invoke(endpoint: GetStation(id: id))
+        try await client.invoke(endpoint: GetStation(id: id))
     }
 
     func tides(
@@ -48,7 +36,7 @@ extension MareaWebClient: MareaClient {
         model: Model,
         datum: Datum
     ) async throws -> Tides {
-        try await webClient.invoke(
+        try await client.invoke(
             endpoint: GetTides(
                 duration: duration,
                 timestamp: timestamp,
@@ -56,7 +44,7 @@ extension MareaWebClient: MareaClient {
                 interval: interval,
                 latitude: latitude,
                 longitude: longitude,
-                model: model.apiString,
+                model: model,
                 stationRadius: nil,
                 stationId: nil,
                 datum: datum
@@ -73,7 +61,7 @@ extension MareaWebClient: MareaClient {
         stationId: String,
         datum: Datum
     ) async throws -> Tides {
-        try await webClient.invoke(
+        try await client.invoke(
             endpoint: GetTides(
                 duration: duration,
                 timestamp: timestamp,
@@ -81,24 +69,11 @@ extension MareaWebClient: MareaClient {
                 interval: interval,
                 latitude: nil,
                 longitude: nil,
-                model: model.apiString,
+                model: model,
                 stationRadius: stationRadius,
                 stationId: stationId,
                 datum: datum
             )
         )
-    }
-}
-
-// MARK: -
-
-private extension Model {
-    var apiString: String {
-        switch self {
-        case .fes2014:
-            return "FES2014"
-        case .eot20:
-            return "EOT20"
-        }
     }
 }

@@ -14,6 +14,11 @@ public struct GetTides: Endpoint {
 
     public var decoder: Decoding { makeJSONDecoder() }
 
+    public enum Model: String {
+        case fes2014 = "FES2014"
+        case eot20 = "EOT20"
+    }
+
     public enum Datum: String {
         case lat = "LAT"
         case hat = "HAT"
@@ -55,7 +60,7 @@ public struct GetTides: Endpoint {
     let longitude: Double?
 
     /// Preferred model for Tide prediction: FES2014 (default) or EOT20
-    let model: String?
+    let model: Model?
 
     /// When station is found in specified station_radius, return the prediction from the station
     /// (if not found, nearest model prediction is used).
@@ -82,7 +87,7 @@ public struct GetTides: Endpoint {
                 interval.map { URLQueryItem(name: "interval", value: String($0)) },
                 latitude.map { URLQueryItem(name: "latitude", value: String($0)) },
                 longitude.map { URLQueryItem(name: "longitude", value: String($0)) },
-                model.map { URLQueryItem(name: "model", value: $0) },
+                model.map { URLQueryItem(name: "model", value: $0.rawValue) },
                 stationRadius.map { URLQueryItem(name: "station_radius", value: String($0)) },
                 stationId.map { URLQueryItem(name: "station_id", value: $0) },
                 datum.map { URLQueryItem(name: "datum", value: $0.rawValue) }
