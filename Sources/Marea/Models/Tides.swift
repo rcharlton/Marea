@@ -4,9 +4,9 @@
 
 import Foundation
 
-public struct Tides: Decodable {
-    public struct Origin: Decodable {
-        public struct Station: Decodable {
+public struct Tides: Decodable, Equatable {
+    public struct Origin: Decodable, Equatable {
+        public struct Station: Decodable, Equatable {
             public let id: String
             public let name: String
             public let provider: String
@@ -21,8 +21,8 @@ public struct Tides: Decodable {
         public let station: Station?
     }
 
-    public struct Extreme: Decodable {
-        public enum State: String, Decodable {
+    public struct Extreme: Decodable, Equatable {
+        public enum State: String, Decodable, Equatable {
             case lowTide = "LOW TIDE"
             case highTide = "HIGH TIDE"
         }
@@ -32,8 +32,8 @@ public struct Tides: Decodable {
         public let state: State
     }
 
-    public struct Height: Decodable {
-        public enum State: String, Decodable {
+    public struct Height: Decodable, Equatable {
+        public enum State: String, Decodable, Equatable {
             case falling = "FALLING"
             case rising = "RISING"
         }
@@ -43,7 +43,7 @@ public struct Tides: Decodable {
         public let state: State
     }
 
-    public enum Source: String, Decodable {
+    public enum Source: String, Decodable, Equatable {
         case station = "STATION"
         case fes2014 = "FES2014"
         case eot20 = "EOT20"

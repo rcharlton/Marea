@@ -1,0 +1,5 @@
+[
+    {"id": "id1", "name": "name1", "country": "country1", "latitude": 1, "longitude": 2},
+    {"id": "id2", "name": "name2", "country": "country2", "latitude": 3, "longitude": 4},
+    {"id": "id3", "name": "name3", "country": "country3", "latitude": 5, "longitude": 6}
+]

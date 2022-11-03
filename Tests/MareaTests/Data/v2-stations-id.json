@@ -1,0 +1,25 @@
+{
+    "status": 200,
+    "id": "ID",
+    "name": "NAME",
+    "country": "COUNTRY",
+    "latitude": 1,
+    "longitude": 2,
+    "provider": "PROVIDER",
+    "type": "REFERENCE",
+    "datums": {
+        "DHQ": 1,
+        "DLQ": 2,
+        "DTL": 3,
+        "GT": 4,
+        "HAT": 5,
+        "LAT": 6,
+        "MHHW": 7,
+        "MHW": 8,
+        "MLLW": 9,
+        "MLW": 10,
+        "MN": 11,
+        "MTL": 12
+    },
+    "timezone": "TIMEZONE"
+}

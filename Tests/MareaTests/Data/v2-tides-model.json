@@ -1,0 +1,67 @@
+{
+  "disclaimer": "DISCLAIMER",
+  "status": 123,
+  "latitude": 1,
+  "longitude": 2,
+  "origin": {
+    "latitude": 3,
+    "longitude": 4,
+    "distance": 5,
+    "unit": "UNIT"
+  },
+  "datums": {
+    "DHQ": 1,
+    "DLQ": 2,
+    "DTL": 3,
+    "GT": 4,
+    "HAT": 5,
+    "LAT": 6,
+    "MHHW": 7,
+    "MHW": 8,
+    "MLLW": 9,
+    "MLW": 10,
+    "MN": 11,
+    "MTL": 12
+  },
+  "timestamp": 12345,
+  "datetime": "2022-10-19T22:07:14+00:00",
+  "unit": "UNIT",
+  "timezone": "TIMEZONE",
+  "datum": "DATUM",
+  "extremes": [
+    {
+      "timestamp": 1,
+      "datetime": "2021-10-05T16:34:10+00:00",
+      "height": 2,
+      "state": "HIGH TIDE"
+    },
+    {
+      "timestamp": 3,
+      "datetime": "2021-10-06T01:08:25+00:00",
+      "height": 4,
+      "state": "LOW TIDE"
+    }
+  ],
+  "heights": [
+    {
+      "timestamp": 5,
+      "datetime": "2021-10-05T16:26:50+00:00",
+      "height": 6,
+      "state": "FALLING"
+    },
+    {
+      "timestamp": 7,
+      "datetime": "2021-10-05T17:26:50+00:00",
+      "height": 8,
+      "state": "RISING"
+    },
+    {
+      "timestamp": 9,
+      "datetime": "2021-10-05T18:26:50+00:00",
+      "height": 10,
+      "state": "FALLING"
+    }
+  ],
+  "source": "FES2014",
+  "copyright": "COPYRIGHT"
+}

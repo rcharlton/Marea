@@ -2,7 +2,7 @@
 // Copyright © 2022 Robin Charlton. All rights reserved.
 //
 
-public struct Error: Decodable {
+public struct Error: Decodable, Equatable {
     public let message: String
     public let statusCode: Int
 

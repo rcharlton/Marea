@@ -2,8 +2,8 @@
 // Copyright © 2022 Robin Charlton. All rights reserved.
 //
 
-public struct Station: Decodable {
-    public enum StationType: String, Decodable {
+public struct Station: Decodable, Equatable {
+    public enum StationType: String, Decodable, Equatable {
         case harmonic = "HARMONIC"
         case reference = "REFERENCE"
     }
