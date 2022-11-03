@@ -32,7 +32,7 @@ final class ListStationsTests: XCTestCase {
             [
                 StationListing(id: "id1", name: "name1", country: "country1", latitude: 1, longitude: 2),
                 StationListing(id: "id2", name: "name2", country: "country2", latitude: 3, longitude: 4),
-                StationListing(id: "id3", name: "name3", country: "country3", latitude: 5, longitude: 6)
+                StationListing(id: "id3", name: "name3", country: nil, latitude: 5, longitude: 6)
             ]
         )
     }
